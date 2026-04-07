@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>JC 프라이빗 룸 - 박성호 대표 명함 시안</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css" />
+  <style>
+    body {
+      background: #e5e5e5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Pretendard', sans-serif;
+      margin: 0;
+    }
+    .card {
+      width: 90mm; /* Standard KR business card size */
+      height: 50mm;
+      background: #0D0D12;
+      border-radius: 4px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 6mm 8mm;
+      box-sizing: border-box;
+    }
+    
+    /* Subtle Glow Effects */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -20px; left: -20px;
+      width: 60mm; height: 60mm;
+      background: rgba(155, 109, 255, 0.4);
+      filter: blur(30px);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .card::after {
+      content: '';
+      position: absolute;
+      bottom: -20px; right: -20px;
+      width: 50mm; height: 50mm;
+      background: rgba(255, 179, 71, 0.3);
+      filter: blur(30px);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .logo {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 24px;
+      letter-spacing: -1px;
+      z-index: 1;
+    }
+    .logo span { color: #FFB347; }
+    .logo-desc {
+      font-size: 7px;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 2px;
+      margin-top: 1px;
+      z-index: 1;
+    }
+
+    .main-info {
+      z-index: 1;
+      margin-top: 4mm;
+    }
+    .name {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin-bottom: 2px;
+    }
+    .title {
+      font-size: 9px;
+      color: #9B6DFF;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .contact-info {
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      align-items: flex-end;
+      text-align: right;
+    }
+    .info-line {
+      font-size: 8px;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 0.5px;
+    }
+    .info-line strong {
+      color: #FFB347;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+      font-size: 9px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 명함 앞면 시안 -->
+  <div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+      <div>
+        <div class="logo">J<span>C</span></div>
+        <div class="logo-desc">PREMIUM PRIVATE ROOM</div>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; z-index: 1; gap: 3px;">
+        <div style="padding: 1px; background: linear-gradient(135deg, #FFB347, #9B6DFF); border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://jc-privateroom.com&margin=0" alt="QR Code" style="width: 12.5mm; height: 12.5mm; display: block; padding: 1.5mm; background: #fff; border-radius: 3px;">
+        </div>
+        <span style="font-family: 'Outfit', sans-serif; font-size: 4px; font-weight: 900; letter-spacing: 1px; color: #FFB347; opacity: 0.9;">RESERVATION</span>
+      </div>
+    </div>
+    
+    <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+      <div class="main-info">
+        <div class="name">박 성 호</div>
+        <div class="title">대표 / CEO</div>
+      </div>
+
+      <div class="contact-info">
+        <div class="info-line">M. <strong>010-5342-2114</strong></div>
+        <div class="info-line">A. 서울특별시 동대문구 이문로 16</div>
+        <div class="info-line">Open 14:00 - Close 02:00</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
