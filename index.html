@@ -419,6 +419,43 @@
     .price-desc { font-size: 0.9rem; color: var(--muted); display: block; margin-top: 4px; }
     .price-val { font-size: 1.5rem; font-weight: 800; font-family: 'Outfit'; color: var(--amber); }
 
+    .price-item--with-thumb {
+      display: grid;
+      grid-template-columns: 56px 1fr auto;
+      gap: 0 14px;
+      align-items: center;
+    }
+    .price-item--with-thumb .price-thumb {
+      grid-column: 1;
+      grid-row: 1 / 3;
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+    }
+    .price-item--with-thumb .price-item-main { grid-column: 2; min-width: 0; }
+    .price-item--with-thumb .price-val { grid-column: 3; grid-row: 1 / 3; align-self: center; }
+
+    .highlight-price--with-thumb .highlight-price-top {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .highlight-price--with-thumb .price-thumb--lg {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,179,71,0.25);
+      flex-shrink: 0;
+    }
+    .highlight-price--with-thumb .name { margin-bottom: 8px; }
+    .highlight-price--with-thumb .val { margin-top: 0; }
+
     .highlight-price {
       background: rgba(255,179,71,0.1);
       border: 1px solid rgba(255,179,71,0.3);
@@ -602,6 +639,27 @@
         gap: 8px;
         padding: 14px 0;
       }
+      .price-item.price-item--with-thumb {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        grid-template-rows: auto auto;
+        gap: 6px 12px;
+        align-items: start;
+      }
+      .price-item--with-thumb .price-thumb {
+        grid-column: 1;
+        grid-row: 1 / 3;
+        width: 48px;
+        height: 48px;
+        align-self: center;
+      }
+      .price-item--with-thumb .price-item-main { grid-column: 2; grid-row: 1; }
+      .price-item--with-thumb .price-val {
+        grid-column: 2;
+        grid-row: 2;
+        justify-self: end;
+        align-self: end;
+      }
       .price-val { align-self: flex-end; font-size: 1.35rem; }
       .price-name { font-size: 1.02rem; }
       .highlight-price .val { font-size: 1.65rem; }
@@ -778,24 +836,31 @@
         <div class="menu-box special">
           <h3>🍷 JC 주류 스페셜</h3>
           
-          <div class="price-item">
-            <div>
+          <div class="price-item price-item--with-thumb">
+            <img class="price-thumb" src="./fresh.png" alt="" width="56" height="56" loading="lazy" decoding="async" />
+            <div class="price-item-main">
               <span class="price-name">소주 (참이슬 / 진로 등)</span>
               <span class="price-desc">편의점보다 저렴한 특별가!</span>
             </div>
             <span class="price-val">₩2,000</span>
           </div>
-          <div class="price-item">
-            <div>
+          <div class="price-item price-item--with-thumb">
+            <img class="price-thumb" src="./cass.png" alt="" width="56" height="56" loading="lazy" decoding="async" />
+            <div class="price-item-main">
               <span class="price-name">맥주 (카스 / 테라 등)</span>
               <span class="price-desc">시원한 맥주 한 병</span>
             </div>
             <span class="price-val">₩2,000</span>
           </div>
 
-          <div class="highlight-price">
-            <span class="name">🔥 양주 원가 판매 이벤트!</span>
-            <span class="desc">고급 양주를 이 가격에? 사장님이 미쳤어요!<br>프리미엄 위스키 <strong>윈저 17년</strong>을 마진 없이 드립니다.</span>
+          <div class="highlight-price highlight-price--with-thumb">
+            <div class="highlight-price-top">
+              <img class="price-thumb--lg" src="./windsor.png" alt="" width="72" height="72" loading="lazy" decoding="async" />
+              <div>
+                <span class="name">🔥 양주 원가 판매 이벤트!</span>
+                <span class="desc">고급 양주를 이 가격에? 사장님이 미쳤어요!<br>프리미엄 위스키 <strong>윈저 17년</strong>을 마진 없이 드립니다.</span>
+              </div>
+            </div>
             <span class="val">₩70,000</span>
           </div>
         </div>
