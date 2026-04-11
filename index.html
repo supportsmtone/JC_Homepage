@@ -139,15 +139,17 @@
       border: 1px solid var(--border);
       box-shadow: 0 20px 40px rgba(0,0,0,0.4);
       background: var(--card);
-      min-height: 450px;
+      min-height: 380px;
+      height: 100%;
+      display: flex;
     }
     .hero-video video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 20%;
+      object-position: center;
       display: block;
-      transform: scale(1.04);
+      transform: scale(1.02);
       transform-origin: center center;
     }
     .hero::before, .hero::after {
@@ -288,21 +290,26 @@
     .stat-chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 14px;
+      justify-content: center;
+      margin-top: 56px;
     }
     .chip {
       background: rgba(255,255,255,0.04);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px 20px;
-      font-size: 0.9rem;
+      border-radius: 999px;
+      padding: 14px 24px;
+      font-size: 0.95rem;
       font-weight: 600;
-      color: rgba(255,255,255,0.8);
-      display: flex;
+      color: rgba(255,255,255,0.85);
+      display: inline-flex;
       align-items: center;
       gap: 8px;
-      white-space: nowrap;
-      line-height: 1.35;
+      transition: all 0.2s;
+    }
+    .chip:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-2px);
     }
     .chip-icon { font-size: 1.1rem; }
 
@@ -493,6 +500,102 @@
       border: 1px solid var(--border);
       height: 450px;
       background: var(--card);
+      position: relative;
+    }
+
+    /* ─── MAP OVERLAYS ─── */
+    .map-overlay-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .map-pin-pulse {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 48px; height: 48px;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 71, 87, 0.4);
+      border-radius: 50%;
+      animation: mapPulse 2s infinite ease-out;
+    }
+    .map-pin-label {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -52px);
+      background: #111;
+      color: #fff;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      padding: 8px 18px;
+      border: 2px solid var(--amber);
+      border-radius: 24px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+      white-space: nowrap;
+      animation: bounceM 2.5s infinite;
+    }
+    .map-pin-label span { color: var(--amber); }
+    .map-pin-label::after {
+      content: '';
+      position: absolute;
+      bottom: -8px; left: 50%;
+      transform: translateX(-50%);
+      border-width: 8px 7px 0;
+      border-style: solid;
+      border-color: #111 transparent transparent transparent;
+    }
+    .map-pin-label::before {
+      content: '';
+      position: absolute;
+      bottom: -10px; left: 50%;
+      transform: translateX(-50%);
+      border-width: 10px 9px 0;
+      border-style: solid;
+      border-color: var(--amber) transparent transparent transparent;
+      z-index: -1;
+    }
+
+    .map-sijosa-box {
+      position: absolute;
+      left: 33%; top: 82%;
+      transform: translate(-50%, -50%);
+      background: #34495e;
+      color: #fff;
+      border: 2px solid #2c3e50;
+      font-weight: 800;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+
+    .map-route-badge {
+      position: absolute;
+      left: 43%; top: 64%;
+      transform: translate(-50%, -50%) rotate(-35deg);
+      background: var(--amber);
+      color: #000;
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 6px 16px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    @keyframes mapPulse {
+      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; }
+    }
+    @keyframes bounceM {
+      0%, 100% { transform: translate(-50%, -52px); }
+      50% { transform: translate(-50%, -58px); }
+    }
+
+    @media (max-width: 768px) {
+      .map-sijosa-box { left: 20%; top: 82%; font-size: 0.85rem; padding: 6px 10px; }
+      .map-route-badge { left: 35%; top: 64%; font-size: 0.75rem; padding: 4px 8px; transform: translate(-50%, -50%) rotate(-35deg); }
     }
     .map-info {
       margin-top: 30px;
@@ -722,45 +825,49 @@
     </div>
   </header>
 
-  <!-- ─── HERO ─── -->
   <section id="home" class="hero">
-    <div class="container hero-grid">
-      <div class="hero-text">
-        <div class="hero-eyebrow">
-          <span class="dot"></span>
-          프리미엄 프라이빗 룸
-        </div>
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <div class="hero-eyebrow">
+            <span class="dot"></span>
+            프리미엄 프라이빗 룸
+          </div>
 
-        <h1>
-          오늘 모임,<br>
-          고민 말고 <em>JC로.</em>
-        </h1>
-        <p class="hero-desc">
-          <strong style="color:var(--amber); border-bottom: 2px solid var(--amber);">[월~토] 오후 2시부터 오전 2시까지 영업!</strong><br>
-          <span style="font-size: 0.95em; color: #fff; font-weight: 600;">※ 일요일은 100% 예약제로만 운영됩니다.</span><br><br>
-          8인실부터 17인실 VIP룸까지 총 6개의 다채로운 공간.<br>
-          방 크기 상관없이 <strong>대여료는 1시간 5만원으로 고정!</strong><br>
-          환상적인 분위기 속에서 자유롭게 음식을 배달시켜 즐겨보세요.
-        </p>
-        <div class="hero-cta">
-          <a href="tel:010-5342-2114" class="btn btn-primary">📞 사전 예약 문의하기</a>
-          <div class="cta-phone">
-            <span>Direct Call</span>
-            <strong>010-5342-2114</strong>
+          <h1>
+            오늘 모임,<br>
+            고민 말고 <em>JC로.</em>
+          </h1>
+          <p class="hero-desc">
+            <strong style="color:var(--amber); border-bottom: 2px solid var(--amber);">[월~토] 오후 2시부터 오전 2시까지 영업!</strong><br>
+            <span style="font-size: 0.95em; color: #fff; font-weight: 600;">※ 일요일은 100% 예약제로만 운영됩니다.</span><br><br>
+            8인실부터 17인실 VIP룸까지 총 6개의 다채로운 공간.<br>
+            방 크기 상관없이 <strong>대여료는 1시간 5만원으로 고정!</strong><br>
+            환상적인 분위기 속에서 자유롭게 음식을 배달시켜 즐겨보세요.
+          </p>
+          <div class="hero-cta">
+            <a href="tel:010-5342-2114" class="btn btn-primary">📞 사전 예약 문의하기</a>
+            <div class="cta-phone">
+              <span>Direct Call</span>
+              <strong>010-5342-2114</strong>
+            </div>
           </div>
         </div>
-
-        <div class="stat-chips">
-          <div class="chip"><span class="chip-icon">🕒</span> 월~토 14:00~02:00</div>
-          <div class="chip"><span class="chip-icon">📅</span> 일요일 예약제</div>
-          <div class="chip"><span class="chip-icon">💸</span> 시간당 5만원 고정</div>
-          <div class="chip"><span class="chip-icon">🍺</span> 소주/맥주 2,000원</div>
-          <div class="chip"><span class="chip-icon">🛵</span> 배달 음식 완전 자유</div>
+        
+        <div class="hero-video-wrap" style="display: flex; flex-direction: column; align-items: stretch; height: 100%;">
+          <div class="hero-video" style="height: 100%;">
+            <video src="./jc.mp4" autoplay loop muted playsinline></video>
+          </div>
+          <p style="font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 10px; text-align: right; letter-spacing: -0.5px;">* 동영상은 AI를 통해 제작된 영상입니다.</p>
         </div>
       </div>
-      
-      <div class="hero-video">
-        <video src="./멋진_남자들의_놀이터_영상_제작.mp4" autoplay loop muted playsinline></video>
+
+      <div class="stat-chips">
+        <div class="chip"><span class="chip-icon">🕒</span> 월~토 14:00~02:00</div>
+        <div class="chip"><span class="chip-icon">📅</span> 일요일 예약제</div>
+        <div class="chip"><span class="chip-icon">💸</span> 시간당 5만원 고정</div>
+        <div class="chip"><span class="chip-icon">🍺</span> 소주/맥주 2,000원</div>
+        <div class="chip"><span class="chip-icon">🛵</span> 배달 음식 완전 자유</div>
       </div>
     </div>
   </section>
@@ -890,7 +997,7 @@
       <div class="map-wrap">
         <!-- 구글 맵: 동대문구 이문로 16 기준 -->
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d790.3571026315918!2d127.054593!3d37.5920704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357cbb71d798b3f1%3A0xe54e565ed6bcbf13!2z7ISc7Jq47Yq567OE7IucIOuPmeuMgOusuOq1rCDsnbTrrLjroZwgMTY!5e0!3m2!1sko!2skr!4v1700000000000!5m2!1sko!2skr" 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1580.7142052631836!2d127.054593!3d37.5920704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357cbb71d798b3f1%3A0xe54e565ed6bcbf13!2z7ISc7Jq47Yq567OE7IucIOuPmeuMgOusuOq1rCDsnbTrrLjroZwgMTY!5e0!3m2!1sko!2skr!4v1700000000000!5m2!1sko!2skr" 
           width="100%" 
           height="100%" 
           style="border:0;" 
@@ -898,6 +1005,28 @@
           loading="lazy" 
           referrerpolicy="no-referrer-when-downgrade">
         </iframe>
+        
+        <!-- 지도 커스텀 오버레이 -->
+        <div class="map-overlay-layer">
+          <!-- 도보 동선 표시선 (SVG) -->
+          <svg style="position:absolute; width:100%; height:100%; top:0; left:0;">
+            <line x1="33%" y1="82%" x2="49%" y2="52%" stroke="#ffb347" stroke-width="4" stroke-dasharray="8,6" />
+          </svg>
+          
+          <!-- 시조사 안내 박스 -->
+          <div class="map-sijosa-box">
+            시조사 삼거리
+          </div>
+          
+          <!-- 도보 경로 배지 -->
+          <div class="map-route-badge">
+            🚶 이문로 도보 2분
+          </div>
+
+          <!-- 중심 핀 펄스 이펙트 & 강조 라벨 -->
+          <div class="map-pin-pulse"></div>
+          <div class="map-pin-label"><span>JC</span> Private Room</div>
+        </div>
       </div>
       <div class="map-info">
         <p>📍 <strong>주소:</strong> 서울특별시 동대문구 이문로 16</p>
