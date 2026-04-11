@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" />
   <title>JC 프라이빗 룸 | 이문로16 — 오늘 여기로 결정!</title>
   <meta name="description" content="사전예약 시 오후 2시~오전 2시 대여 가능! 8인~17인 프라이빗 룸. 소주·맥주 2,000원, 윈저 17년 7만원 원가 판매! 배달 음식 환영." />
   <link rel="canonical" href="https://playjc.co.kr/" />
@@ -51,7 +51,11 @@
     *, ::before, ::after { box-sizing: border-box; margin: 0; padding: 0; }
     ::selection { background: var(--amber); color: #000; }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
 
     body {
       font-family: 'Pretendard', 'Outfit', sans-serif;
@@ -64,6 +68,7 @@
       overflow-wrap: break-word;
       padding-left: env(safe-area-inset-left, 0);
       padding-right: env(safe-area-inset-right, 0);
+      padding-bottom: max(0px, env(safe-area-inset-bottom, 0));
     }
 
     /* ─── NOISE TEXTURE ─── */
@@ -86,6 +91,7 @@
       z-index: 1;
       padding-left: max(16px, env(safe-area-inset-left));
       padding-right: max(16px, env(safe-area-inset-right));
+      min-width: 0;
     }
 
     /* ─── TOP BAR ─── */
@@ -97,7 +103,7 @@
       -webkit-backdrop-filter: blur(20px);
       background: rgba(13,13,18,0.8);
       border-bottom: 1px solid var(--border);
-      padding: 15px 0;
+      padding: calc(15px + env(safe-area-inset-top, 0px)) 0 15px;
     }
     .topbar-inner {
       display: flex;
@@ -108,7 +114,8 @@
       margin: 0 auto;
       padding-left: max(16px, env(safe-area-inset-left));
       padding-right: max(16px, env(safe-area-inset-right));
-      gap: 12px;
+      gap: clamp(8px, 2.5vw, 12px);
+      min-width: 0;
     }
     .logo-mark {
       font-family: 'Outfit', sans-serif;
@@ -149,8 +156,27 @@
     .hero-grid {
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
-      gap: 50px;
+      gap: clamp(24px, 4vw, 50px);
       align-items: stretch;
+      min-width: 0;
+    }
+    .hero-text {
+      min-width: 0;
+    }
+    .hero-video-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      min-width: 0;
+      width: 100%;
+    }
+    .hero-video-note {
+      font-size: clamp(0.68rem, 2.8vw, 0.75rem);
+      color: rgba(255,255,255,0.4);
+      margin-top: 10px;
+      text-align: right;
+      letter-spacing: -0.02em;
+      line-height: 1.35;
     }
     .hero-video {
       position: relative;
@@ -159,13 +185,24 @@
       border: 1px solid var(--border);
       box-shadow: 0 20px 40px rgba(0,0,0,0.4);
       background: var(--card);
-      min-height: 380px;
-      height: 100%;
       display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    @media (min-width: 1025px) {
+      .hero-video-wrap {
+        align-self: stretch;
+        min-height: min(380px, 56dvh);
+      }
+      .hero-video {
+        flex: 1 1 auto;
+        min-height: min(380px, 56dvh);
+      }
     }
     .hero-video video {
       width: 100%;
-      height: 100%;
+      flex: 1 1 auto;
+      min-height: 0;
       object-fit: cover;
       object-position: center;
       display: block;
@@ -363,8 +400,9 @@
     /* ─── ROOMS SECTION ─── */
     .rooms-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(16px, 2.5vw, 24px);
+      min-width: 0;
     }
     .room-card {
       background: var(--card);
@@ -411,8 +449,9 @@
     /* ─── MENU SECTION ─── */
     .menu-wrap {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(24px, 4vw, 40px);
+      min-width: 0;
     }
     .menu-box {
       background: var(--card);
@@ -518,9 +557,15 @@
       border-radius: 24px;
       overflow: hidden;
       border: 1px solid var(--border);
-      height: 450px;
+      height: clamp(260px, 48dvh, 450px);
       background: var(--card);
       position: relative;
+    }
+    .map-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
 
     /* ─── MAP OVERLAYS ─── */
@@ -641,14 +686,31 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 1024px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-      .hero-video { max-width: 800px; margin: 0 auto; width: 100%; }
-      .rooms-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: clamp(22px, 4vw, 40px);
+        align-items: start;
+      }
+      .hero-video-wrap {
+        height: auto;
+        width: 100%;
+        max-width: min(800px, 100%);
+        margin-inline: auto;
+      }
+      .hero-video {
+        flex: 0 0 auto;
+        height: auto;
+        min-height: 0;
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        max-height: min(52dvh, 560px);
+      }
+      .rooms-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .menu-wrap { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 768px) {
-      .topbar { padding: 12px 0; }
+      .topbar { padding: calc(12px + env(safe-area-inset-top, 0px)) 0 12px; }
       .topbar-inner {
         display: grid;
         grid-template-columns: 1fr auto;
@@ -679,10 +741,10 @@
       .btn-sm { min-height: 44px; padding: 12px 18px; }
 
       .hero {
-        padding: 72px 0 48px;
+        padding: 72px 0 max(48px, env(safe-area-inset-bottom, 0px));
         min-height: auto;
       }
-      .hero-grid { gap: 28px; }
+      .hero-grid { gap: clamp(20px, 5vw, 28px); }
       .hero h1 {
         font-size: clamp(1.85rem, 9.2vw, 2.75rem);
         margin-bottom: 20px;
@@ -701,7 +763,7 @@
       .hero-video {
         min-height: 0;
         aspect-ratio: 16 / 10;
-        max-height: 52vh;
+        max-height: min(50dvh, 420px);
         border-radius: 18px;
       }
       .hero-video video { transform: scale(1.02); }
@@ -743,8 +805,12 @@
       .sec-title { font-size: clamp(1.45rem, 5vw, 2rem); margin-bottom: 12px; }
       .sec-sub { font-size: 0.98rem; margin-bottom: 36px; line-height: 1.65; }
 
-      .rooms-grid { grid-template-columns: 1fr; gap: 18px; }
-      .room-img-wrap { height: 200px; }
+      .rooms-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+      .room-img-wrap {
+        height: auto;
+        aspect-ratio: 16 / 10;
+        min-height: clamp(160px, 42vw, 220px);
+      }
       .room-content { padding: 18px; }
       .room-cap {
         font-size: 1.25rem;
@@ -796,7 +862,7 @@
       }
 
       .map-wrap {
-        height: min(320px, 55vh);
+        height: clamp(220px, 52dvh, 380px);
         border-radius: 18px;
       }
       .map-info p {
@@ -874,11 +940,11 @@
           </div>
         </div>
         
-        <div class="hero-video-wrap" style="display: flex; flex-direction: column; align-items: stretch; height: 100%;">
-          <div class="hero-video" style="height: 100%;">
+        <div class="hero-video-wrap">
+          <div class="hero-video">
             <video src="./jc.mp4" autoplay loop muted playsinline></video>
           </div>
-          <p style="font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 10px; text-align: right; letter-spacing: -0.5px;">* 동영상은 AI를 통해 제작된 영상입니다.</p>
+          <p class="hero-video-note">* 동영상은 AI를 통해 제작된 영상입니다.</p>
         </div>
       </div>
 
