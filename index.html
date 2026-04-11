@@ -567,6 +567,12 @@
       height: 100%;
       border: 0;
     }
+    .static-map-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
     /* ─── MAP OVERLAYS ─── */
     .map-overlay-layer {
@@ -1095,41 +1101,16 @@
     <div class="container">
       <p class="sec-label">Location</p>
       <h2 class="sec-title">오시는 길</h2>
-      <p class="sec-sub">서울시 동대문구 이문로16. 대중교통 이용이 매우 편리합니다.</p>
+      <p class="sec-sub" style="margin-bottom: 24px;">서울시 동대문구 이문로16. 대중교통 이용이 매우 편리합니다.</p>
+      <div style="text-align: center; margin-bottom: 40px;">
+        <span style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255,179,71,0.12); border: 1px solid var(--amber); color: var(--amber); font-weight: 800; padding: 10px 24px; border-radius: 999px; font-size: 1.15rem; box-shadow: 0 4px 20px rgba(255,179,71,0.2);">
+          🚇 회기역 1번출구에서 도보 4분 거리
+        </span>
+      </div>
 
       <div class="map-wrap">
-        <!-- 구글 맵: 동대문구 이문로 16 기준 -->
-        <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5600.7142052631836!2d127.054593!3d37.5920704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357cbb71d798b3f1%3A0xe54e565ed6bcbf13!2z7ISc7Jq47Yq567OE7IucIOuPmeuMgOusuOq1rCDsnbTrrLjroZwgMTY!5e0!3m2!1sko!2skr!4v1700000000000!5m2!1sko!2skr" 
-          width="100%" 
-          height="100%" 
-          style="border:0;" 
-          allowfullscreen="" 
-          loading="lazy" 
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-        
-        <!-- 지도 커스텀 오버레이 -->
-        <div class="map-overlay-layer">
-          <!-- 도보 동선 표시선 (SVG) -->
-          <svg class="map-overlay-walk" viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute; width:100%; height:100%; top:0; left:0;" aria-hidden="true">
-            <line x1="28" y1="76" x2="52" y2="46" stroke="#ffb347" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="4 3.5" />
-          </svg>
-          
-          <!-- 시조사 안내 박스 -->
-          <div class="map-sijosa-box">
-            시조사 삼거리
-          </div>
-          
-          <!-- 도보 경로 배지 -->
-          <div class="map-route-badge">
-            🚶 이문로 도보 2분
-          </div>
-
-          <!-- 중심 핀 펄스 이펙트 & 강조 라벨 -->
-          <div class="map-pin-pulse"></div>
-          <div class="map-pin-label"><span>JC</span> Private Room</div>
-        </div>
+        <!-- 정적 지도 이미지 (Google Maps 임베드 대신 첨부된 이미지 사용) -->
+        <img src="./map.png" alt="JC Private Room 오시는 길 약도" class="static-map-img">
       </div>
       <div class="map-info">
         <p>📍 <strong>주소:</strong> 서울특별시 동대문구 이문로 16</p>
