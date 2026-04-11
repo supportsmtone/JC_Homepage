@@ -14,17 +14,17 @@
   <meta property="og:url" content="https://playjc.co.kr/" />
   <meta property="og:title" content="JC 프라이빗 룸 | 이문로16 — 오늘 여기로 결정!" />
   <meta property="og:description" content="사전예약 시 오후 2시~오전 2시 대여 가능! 8인~17인 프라이빗 룸. 소주·맥주 2,000원, 윈저 17년 7만원 원가 판매! 배달 음식 환영." />
-  <meta property="og:image" content="https://playjc.co.kr/og-image.png" />
-  <meta property="og:image:secure_url" content="https://playjc.co.kr/og-image.png" />
+  <meta property="og:image" content="https://playjc.co.kr/jc-og.png" />
+  <meta property="og:image:secure_url" content="https://playjc.co.kr/jc-og.png" />
   <meta property="og:image:type" content="image/png" />
-  <meta property="og:image:width" content="498" />
-  <meta property="og:image:height" content="1024" />
+  <meta property="og:image:width" content="583" />
+  <meta property="og:image:height" content="1200" />
   <meta property="og:image:alt" content="JC Private Room Service — 이문로16 프라이빗 룸" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="JC 프라이빗 룸 | 이문로16 — 오늘 여기로 결정!" />
   <meta name="twitter:description" content="사전예약 시 오후 2시~오전 2시 대여 가능! 8인~17인 프라이빗 룸. 소주·맥주 2,000원, 윈저 17년 7만원 원가 판매! 배달 음식 환영." />
-  <meta name="twitter:image" content="https://playjc.co.kr/og-image.png" />
+  <meta name="twitter:image" content="https://playjc.co.kr/jc-og.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -623,7 +623,7 @@
 
     .map-sijosa-box {
       position: absolute;
-      left: 33%; top: 82%;
+      left: 30%; top: 76%;
       transform: translate(-50%, -50%);
       background: #34495e;
       color: #fff;
@@ -638,8 +638,8 @@
 
     .map-route-badge {
       position: absolute;
-      left: 43%; top: 64%;
-      transform: translate(-50%, -50%) rotate(-35deg);
+      left: 40%; top: 58%;
+      transform: translate(-50%, -50%) rotate(-32deg);
       background: var(--amber);
       color: #000;
       font-weight: 800;
@@ -659,8 +659,25 @@
     }
 
     @media (max-width: 768px) {
-      .map-sijosa-box { left: 20%; top: 82%; font-size: 0.85rem; padding: 6px 10px; }
-      .map-route-badge { left: 35%; top: 64%; font-size: 0.75rem; padding: 4px 8px; transform: translate(-50%, -50%) rotate(-35deg); }
+      .map-sijosa-box {
+        left: 26%;
+        top: 70%;
+        font-size: clamp(0.72rem, 2.8vw, 0.85rem);
+        padding: 6px 10px;
+        max-width: min(42vw, 160px);
+        line-height: 1.25;
+      }
+      .map-route-badge {
+        left: 32%;
+        top: 54%;
+        font-size: clamp(0.68rem, 2.6vw, 0.78rem);
+        padding: 5px 10px;
+        transform: translate(-50%, -50%) rotate(-28deg);
+      }
+      .map-pin-label {
+        font-size: clamp(0.92rem, 3.4vw, 1.05rem);
+        padding: 7px 14px;
+      }
     }
     .map-info {
       margin-top: 30px;
@@ -1083,7 +1100,7 @@
       <div class="map-wrap">
         <!-- 구글 맵: 동대문구 이문로 16 기준 -->
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1580.7142052631836!2d127.054593!3d37.5920704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357cbb71d798b3f1%3A0xe54e565ed6bcbf13!2z7ISc7Jq47Yq567OE7IucIOuPmeuMgOusuOq1rCDsnbTrrLjroZwgMTY!5e0!3m2!1sko!2skr!4v1700000000000!5m2!1sko!2skr" 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5600.7142052631836!2d127.054593!3d37.5920704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357cbb71d798b3f1%3A0xe54e565ed6bcbf13!2z7ISc7Jq47Yq567OE7IucIOuPmeuMgOusuOq1rCDsnbTrrLjroZwgMTY!5e0!3m2!1sko!2skr!4v1700000000000!5m2!1sko!2skr" 
           width="100%" 
           height="100%" 
           style="border:0;" 
@@ -1095,8 +1112,8 @@
         <!-- 지도 커스텀 오버레이 -->
         <div class="map-overlay-layer">
           <!-- 도보 동선 표시선 (SVG) -->
-          <svg style="position:absolute; width:100%; height:100%; top:0; left:0;">
-            <line x1="33%" y1="82%" x2="49%" y2="52%" stroke="#ffb347" stroke-width="4" stroke-dasharray="8,6" />
+          <svg class="map-overlay-walk" viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute; width:100%; height:100%; top:0; left:0;" aria-hidden="true">
+            <line x1="28" y1="76" x2="52" y2="46" stroke="#ffb347" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="4 3.5" />
           </svg>
           
           <!-- 시조사 안내 박스 -->
