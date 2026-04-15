@@ -557,9 +557,10 @@
       border-radius: 24px;
       overflow: hidden;
       border: 1px solid var(--border);
-      height: clamp(260px, 48dvh, 450px);
+      /* 높이 고정 제거 → 이미지 비율(1153:447)에 맞춰 자동 조절 */
       background: var(--card);
       position: relative;
+      width: 100%;
     }
     .map-wrap iframe {
       display: block;
@@ -569,9 +570,10 @@
     }
     .static-map-img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;           /* 비율 유지 */
+      object-fit: contain;    /* 잘림 없이 전체 표시 */
       display: block;
+      border-radius: 24px;    /* wrap overflow:hidden 과 동일 보정 */
     }
 
     /* ─── MAP OVERLAYS ─── */
@@ -885,7 +887,10 @@
       }
 
       .map-wrap {
-        height: clamp(220px, 52dvh, 380px);
+        /* 모바일에서도 height 고정 제거 — 이미지 비율이 자동 적용됨 */
+        border-radius: 18px;
+      }
+      .static-map-img {
         border-radius: 18px;
       }
       .map-info p {
